@@ -13,6 +13,10 @@ from services import Read_DepartmentCodes
 import os
 import uuid
 from werkzeug.utils import secure_filename
+from Auto_Run_Script.Auto_backup_Everyday import export_issued_books_to_excel 
+
+export_issued_books_to_excel()
+
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

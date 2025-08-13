@@ -48,7 +48,7 @@ tr:hover .delete-icon { display: inline-block; }
   <img
     src="{{ url_for('static', filename='OIP.png') }}"
     alt="College Logo"
-    class="h-20 w-20 object-contain mx-auto md:mx-0"
+    class="h-16 w-16 object-contain mx-auto md:mx-0"
   />
 
   <div class="flex-1 text-center md:text-left">
@@ -62,26 +62,148 @@ tr:hover .delete-icon { display: inline-block; }
   </div>
 </div>
 
-<a href="/search_statistics"
-   class="inline-flex items-center gap-2 px-5 py-3 rounded-xl shadow-md bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700 text-white font-semibold transition-transform transform ml-1 ">
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="20" height="20">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M11 19V6m-4 13v-4m8 4V10m4 9V4" />
-  </svg>
-  <span>Books Statistics</span>
-</a>
+<!-- Main Content Wrapper -->
+<div class="mx-6">
+  <style>
+    /* Smooth white-to-transparent reveal */
+    @keyframes whiteFadeReveal {
+      0% {
+        opacity: 0;
+        filter: brightness(1.5) blur(8px);
+      }
+      50% {
+        opacity: 1;
+        filter: brightness(1.2) blur(4px);
+      }
+      100% {
+        opacity: 1;
+        filter: brightness(1) blur(0);
+      }
+    }
 
-<!-- Download Report Button -->
-<div class="inline-block ml-2">
-  <button 
+    .logo-animate-once {
+      animation: whiteFadeReveal 1.2s ease-out forwards;
+    }
+  </style>
+
+  <div class="flex justify-center mt-10 mb-6">
+    <img 
+      src="{{ url_for('static', filename='e-jnana_setu_logo_-removebg-preview.png') }}" 
+      alt="E-JNANA SETU Logo" 
+      class="h-24 w-auto object-contain logo-animate-once"
+    />
+  </div>
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="text-center mb-4 fade-in">
+      <h1 class="text-2xl font-bold text-gray-800">
+        Book Transactions
+      </h1>
+      <p class="text-gray-500 text-xs mt-1 tracking-wide">
+        Issued & Returned Books
+      </p>
+    </div>
+  </div>
+
+
+
+  <!-- Top Action Buttons Row -->
+  <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-6">
+    <!-- Left side - Statistics and Report -->
+    <div class="flex flex-col sm:flex-row items-center gap-3">
+      
+
+     
+    </div>
+
+    <!-- Right side - History & Deleted Excel dropdown -->
+   
+  </div>
+
+  <!-- Book Management Buttons Row -->
+  <div class="flex flex-col md:flex-row items-center justify-center gap-4 mb-6 fade-in">
+    <button 
     onclick="openReportModal()" 
-    class="inline-flex items-center gap-2 px-5 py-3 rounded-xl shadow-md bg-gradient-to-r from-green-500 to-blue-600 hover:from-green-600 hover:to-blue-700 text-white font-semibold transition-transform transform ">
+    class="inline-flex items-center gap-2 px-5 py-3 rounded-xl shadow-md bg-gradient-to-r from-green-500 to-blue-600 hover:from-green-600 hover:to-blue-700 text-white font-semibold transition-all duration-300 hover:scale-105">
      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="18" height="18">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 4v11" />
           </svg>
     <span>Download Report</span>
   </button>
+    <a href="/search_statistics"
+         class="inline-flex items-center gap-2 px-5 py-3 rounded-xl shadow-md bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700 text-white font-semibold transition-all duration-300 hover:scale-105">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="20" height="20">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M11 19V6m-4 13v-4m8 4V10m4 9V4" />
+        </svg>
+        <span>Books Statistics</span>
+      </a>
+    <a href="/issue-book"
+      class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 flex items-center gap-2 hover:scale-105 shadow-md">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
+      </svg>
+      Issue Book
+    </a>
+
+    <a href="{{ url_for('all_books') }}"
+      class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 flex items-center gap-2 hover:scale-105 shadow-md">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+     stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+<path stroke-linecap="round" stroke-linejoin="round"
+      d="M3.75 6.75c2.25-1.25 5.25-1.25 7.5 0v10.5c-2.25-1.25-5.25-1.25-7.5 0V6.75zm16.5 0c-2.25-1.25-5.25-1.25-7.5 0v10.5c2.25-1.25 5.25-1.25 7.5 0V6.75z"/>
+</svg>
+    All Books
+  </a>
+  <div class="relative">
+    <button id="clearViewBtn"
+      class="flex items-center gap-2 px-5 py-3 rounded-xl shadow-md bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white font-bold transition-all duration-300 hover:scale-105"
+      onclick="openClearViewMenu()">
+     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="20" height="20">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-6-8.485M12 3v1m0 16v1m8-8h1M3 12H2" />
+</svg>
+      <span class="font-semibold">History & Backup</span>
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+      </svg>
+    </button>
+    <div id="clearViewMenu" class="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-200 z-50 hidden">
+      <button onclick="confirmDelete('{{ url_for('clear_history') }}')" class="w-full flex items-center gap-2 px-4 py-3 text-red-700 hover:bg-red-100 rounded-t-xl transition-all">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5 h-5">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+        <span>Clear History</span>
+      </button>
+      <a href="{{ url_for('deleted_data') }}" class="w-full flex items-center gap-2 px-4 py-3 text-blue-700 hover:bg-blue-100 rounded-b-xl transition-all">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5 h-5">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        </svg>
+        <span>View Backup</span>
+      </a>
+    </div>
+  </div>
 </div>
+
+
+<!-- Search and Filter Section -->
+<div class="flex flex-col md:flex-row items-center gap-4 mb-4 mx-8">
+  <!-- SEARCH BAR -->
+  <div class="flex flex-1 relative">
+    <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none animate-pulse">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-400">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 104.5 4.5a7.5 7.5 0 0012.15 12.15z"/>
+      </svg>
+    </span>
+    <input id="searchInput" type="text" placeholder="Search..."
+      class="flex-1 pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm" />
+  </div>
+
+  <select id="statusFilter" onchange="filterByStatus()"
+    class="px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm">
+    <option value="">All Status</option>
+    <option value="Issued">Issued</option>
+    <option value="Returned">Returned</option>
+  </select>
+</div> 
 
 <!-- Modal for report options -->
 <div id="reportModal" class="fixed inset-0 bg-black bg-opacity-40 backdrop-blur-sm flex items-center justify-center z-50 hidden">
@@ -116,95 +238,6 @@ tr:hover .delete-icon { display: inline-block; }
     </button>
   </div>
 </div>
-
-
-
-<div class="max-w-7xl mx-auto px-4">
- <div class="text-center mb-4 fade-in">
-  <h1 class="text-3xl font-bold text-gray-800">
-    Book Transactions
-  </h1>
-  <p class="text-gray-500 text-sm mt-1 tracking-wide">
-    Issued & Returned Books
-  </p>
-</div>
-
-
-
-
-  <div class="flex flex-col md:flex-row items-center gap-4 mb-4 fade-in">
-  
-
-  <!-- Simple Gradient Button for History & Deleted Excel -->
-  <div class="relative">
-    <button id="clearViewBtn"
-      class="flex items-center gap-2 px-5 py-2 rounded-lg shadow-md bg-gradient-to-r from-green-500 to-blue-600 text-white font-bold transition-all duration-300 hover:from-green-600 hover:to-blue-700"
-      onclick="openClearViewMenu()">
-     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="20" height="20">
-  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-6-8.485M12 3v1m0 16v1m8-8h1M3 12H2" />
-</svg>
-
-      <span class="font-semibold">History & Deleted Excel</span>
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-      </svg>
-    </button>
-    <div id="clearViewMenu" class="absolute left-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-200 z-50 hidden">
-      <button onclick="confirmDelete('{{ url_for('clear_history') }}')" class="w-full flex items-center gap-2 px-4 py-3 text-red-700 hover:bg-red-100 rounded-t-xl transition-all">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5 h-5">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-        <span>Clear History</span>
-      </button>
-      <a href="{{ url_for('deleted_data') }}" class="w-full flex items-center gap-2 px-4 py-3 text-blue-700 hover:bg-blue-100 rounded-b-xl transition-all">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5 h-5">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-        </svg>
-        <span>View Deleted Excel</span>
-      </a>
-    </div>
-  </div>
-
-    <a href="/issue-book"
-      class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-5 rounded-lg transition-all duration-300 flex items-center gap-2">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
-      </svg>
-      Issue Book
-    </a>
-
-    <a href="{{ url_for('all_books') }}"
-      class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-5 rounded-lg transition-all duration-300 flex items-center gap-2">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-     stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-  <path stroke-linecap="round" stroke-linejoin="round"
-        d="M3.75 6.75c2.25-1.25 5.25-1.25 7.5 0v10.5c-2.25-1.25-5.25-1.25-7.5 0V6.75zm16.5 0c-2.25-1.25-5.25-1.25-7.5 0v10.5c2.25-1.25 5.25-1.25 7.5 0V6.75z"/>
-</svg>
-
-
-
-      
-      All Books
-    </a>
-
-    <!-- SEARCH BAR -->
-    <div class="flex flex-1 relative">
-      <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none animate-pulse">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-400">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 104.5 4.5a7.5 7.5 0 0012.15 12.15z"/>
-        </svg>
-      </span>
-      <input id="searchInput" type="text" placeholder="Search..."
-        class="flex-1 pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
-    </div>
-
-    <select id="statusFilter" onchange="filterByStatus()"
-      class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-      <option value="">All Status</option>
-      <option value="Issued">Issued</option>
-      <option value="Returned">Returned</option>
-    </select>
-  </div>
 
   <div class="bg-white rounded-lg shadow-lg overflow-hidden fade-in">
     <div class="w-full" id="tableContainer">
@@ -266,6 +299,7 @@ tr:hover .delete-icon { display: inline-block; }
     </div>
   </div>
 </div>
+</div> <!-- Closing the main content wrapper div -->
 
 <script>
 
