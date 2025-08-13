@@ -1,8 +1,17 @@
 import pandas as pd
 import os
-from DB.connection import db  # Your MongoDB connection
+import glob
+ # Your MongoDB connection
 from openpyxl import load_workbook
+from datetime import datetime
+from pymongo import MongoClient
 
+try:
+    client = MongoClient('mongodb://localhost:27017/')
+    db = client['library_db']
+    print("Connected to MongoDB")
+except Exception as e:
+    print(f"Error connecting to MongoDB: {e}")
 # --- MongoDB Collection ---
 issued_books = db['issued_books']
 
@@ -10,8 +19,41 @@ issued_books = db['issued_books']
 backup_folder = r"D:/Library_Issued_Backup"
 os.makedirs(backup_folder, exist_ok=True)  # Create folder if missing
 
-# --- Output File Path ---
-excel_file_path = os.path.join(backup_folder, "issued_books_latest.xlsx")
+# --- Max backups to keep ---
+MAX_BACKUPS = 5
+
+
+def get_next_backup_filename():
+    print("get_next_backup_filename READED")
+    """
+    Get next backup file name based on existing backups.
+    Files are named: issued_books_backup1.xlsx, backup2.xlsx, etc.
+    """
+    existing_files = sorted(
+        glob.glob(os.path.join(backup_folder, "issued_books_backup*.xlsx")),
+        key=os.path.getmtime
+    )
+
+    # If we have more than MAX_BACKUPS - 1, delete oldest
+    while len(existing_files) >= MAX_BACKUPS:
+        oldest_file = existing_files.pop(0)
+        try:
+            os.remove(oldest_file)
+            print(f"Deleted old backup: {oldest_file}")
+        except Exception as e:
+            print(f"Error deleting {oldest_file}: {e}")
+
+    # Determine the next backup number
+    all_numbers = []
+    for file in existing_files:
+        try:
+            num = int(os.path.splitext(os.path.basename(file))[0].replace("issued_books_backup", ""))
+            all_numbers.append(num)
+        except ValueError:
+            pass
+
+    next_num = max(all_numbers, default=0) + 1
+    return os.path.join(backup_folder, f"issued_books_backup{next_num}.xlsx")
 
 
 def export_issued_books_to_excel():
@@ -46,6 +88,8 @@ def export_issued_books_to_excel():
                 "Returned At": doc.get("returned_at", "")
             })
 
+        excel_file_path = get_next_backup_filename()
+
         try:
             # Convert to DataFrame and save to Excel
             df = pd.DataFrame(flattened_data)
@@ -72,3 +116,4 @@ def export_issued_books_to_excel():
 
     except Exception as e:
         print(f"[GENERAL ERROR] An unexpected error occurred: {e}")
+export_issued_books_to_excel()
